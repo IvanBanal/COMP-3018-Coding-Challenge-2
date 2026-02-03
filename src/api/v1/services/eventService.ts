@@ -29,7 +29,9 @@ const attendees: Attendee[] = [
     { id: 2, name: "Alex Chen", email: "alex.chen@email.com" }
 ];
 
-
+// ----------------------
+// Service functions.
+// ----------------------
 // Returns all events.
 export const getAllEvents = (): EventRecord[] => events;
 
@@ -37,42 +39,21 @@ export const getAllEvents = (): EventRecord[] => events;
 export const getEventById = (id: number): EventRecord | undefined =>
     events.find((event) => event.id === id);
 
-// Creates a new event with default registrationCount = 0.
-export const createEvent = (
-    name: string,
-    date: string,
-    capacity: number,
-): EventRecord => {
+// Create new event.
+export const createEvent = (data: { name: string; date: string; capacity: number }) => {
     const newEvent: EventRecord = {
         /**
-         * events.length will return the number of items in the EventRecord array
-         * and adds 1 to the current length.
+         * This will get the current length of the array and 
+         * adds 1 to it when creating a new event.
          */
-        id: events.length + 1,
-        name,
-        date,
-        capacity,
+        id: events.length + 1, 
         registrationCount: 0,
+        name: data.name,
+        date: data.date,
+        capacity: data.capacity
     };
-    
-    // This will add a new item to the array.
-    events.push(newEvent);
+
+    events.push(newEvent)
     return newEvent;
 };
 
-// This will update an existing event.
-export const updateEvent = (
-    id: number,
-    /**
-     * This line just means that fields in EventRecord are optional. 
-     * Without this it will give an error.
-     */
-    data: Partial<EventRecord>
-): EventRecord | null => {
-    const event = getEventById(id);
-    
-    if (!event) return null;
-
-
-
-};
