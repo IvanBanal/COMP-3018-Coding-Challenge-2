@@ -1,3 +1,6 @@
+// ----------------------
+// Interfaces.
+// ----------------------
 interface EventRecord {
     id: number;
     name: string;
@@ -12,30 +15,20 @@ interface Attendee {
     email: string;
 }
 
-// Hard-coded sample data of events.
+// ----------------------
+// Hard-coded sample datas.
+// ----------------------
 const events: EventRecord[] = [
-    {
-        id: 1,
-        name: "Tech Conference 2025",
-        date: "2025-03-15T09:00:00.000Z",
-        capacity: 200,
-        registrationCount: 185,
-    },
-        {
-        id: 2,
-        name: "Startup Pitch Night",
-        date: "2025-02-20T18:00:00.000Z",
-        capacity: 50,
-        registrationCount: 12,
-    },
-        {
-        id: 3,
-        name: "Web Dev Workshop",
-        date: "2025-02-10T10:00:00.000Z",
-        capacity: 30,
-        registrationCount: 30,
-    },
-]; 
+    { id: 1, name: "Tech Conference 2025", date: "2025-03-15T09:00:00.000Z", capacity: 200, registrationCount: 185 },
+    { id: 2, name: "Startup Pitch Night", date: "2025-02-20T18:00:00.000Z", capacity: 50, registrationCount: 12 },
+    { id: 3, name: "Web Dev Workshop", date: "2025-02-10T10:00:00.000Z", capacity: 30, registrationCount: 30 }
+];  
+
+const attendees: Attendee[] = [
+    { id: 1, name: "Jordan Smith", email: "jordan.smith@email.com" },
+    { id: 2, name: "Alex Chen", email: "alex.chen@email.com" }
+];
+
 
 // Returns all events.
 export const getAllEvents = (): EventRecord[] => events;
@@ -65,4 +58,21 @@ export const createEvent = (
     // This will add a new item to the array.
     events.push(newEvent);
     return newEvent;
+};
+
+// This will update an existing event.
+export const updateEvent = (
+    id: number,
+    /**
+     * This line just means that fields in EventRecord are optional. 
+     * Without this it will give an error.
+     */
+    data: Partial<EventRecord>
+): EventRecord | null => {
+    const event = getEventById(id);
+    
+    if (!event) return null;
+
+
+
 };
