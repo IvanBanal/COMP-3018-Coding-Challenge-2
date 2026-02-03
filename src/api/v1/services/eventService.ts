@@ -35,4 +35,7 @@ const events: EventRecord[] = [
         capacity: 30,
         registrationCount: 30
     },
-];  
+]; 
+
+export const getAllEvents = () => events;
+
