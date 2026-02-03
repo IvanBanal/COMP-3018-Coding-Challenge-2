@@ -57,3 +57,15 @@ export const createEvent = (data: { name: string; date: string; capacity: number
     return newEvent;
 };
 
+// Update existing event.
+// Partial will make all fields optional.
+export const updateEvent = (id: number, data: Partial<{ name: string; date: string; capacity: number }>) => {
+    const event = getEventById(id);
+    if (!event) return null;
+    
+    if (data.name) event.name = data.name;
+    if (data.date) event.date = data.date;
+    if (data.capacity !== undefined) event.capacity = data.capacity;
+
+    return event;
+};
