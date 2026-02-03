@@ -6,3 +6,9 @@ interface EventRecord {
     registrationCount: number;
 }
 
+interface Attendee {
+    id: number;
+    name: string;
+    email: string;
+}
+
