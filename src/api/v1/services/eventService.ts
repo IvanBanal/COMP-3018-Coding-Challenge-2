@@ -80,3 +80,40 @@ export const deleteEvent = (id: number) => {
     return true;
 };  
 
+// Get popularity infor for an event.
+export const getEventPopularity = (id: number) => {
+    const event = getEventById(id);
+    if (!event) return null;
+
+    const spotsRemaining = event.capacity - event.registrationCount;
+
+    let popularityScore = 0;
+    if (event.capacity > 0) {
+        /**
+         * This formula will get the popularity score.
+         * .toFixed(1) will round the number to 1 decimal place, but returns a string like "85.5".
+         * parseFloat() will convert it back to a number so popularityScore is 85.5 instead of "85.5".  
+         */
+        popularityScore = parseFloat(
+            ((event.registrationCount / event.capacity) * 100).toFixed(1)
+        );
+    }
+
+    // Defaults popularityTier to "New" if none of the if-else statements run.
+    let popularityTier = "New";
+    if (popularityScore >= 90) popularityTier = "Hot";
+    else if (popularityScore >= 70) popularityTier = "Popular";
+    else if (popularityScore >= 50) popularityTier = "Moderate";
+    else if (popularityScore >= 25) popularityTier = "Building";
+
+    return {
+        id: event.id,
+        name: event.name,
+        date: event.date,
+        capacity: event.capacity,
+        registrationCount: event.registrationCount,
+        spotsRemaining: spotsRemaining,
+        popularityScore: popularityScore,
+        popularityTier: popularityTier
+    };
+};
