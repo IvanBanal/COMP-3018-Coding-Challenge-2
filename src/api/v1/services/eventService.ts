@@ -69,3 +69,14 @@ export const updateEvent = (id: number, data: Partial<{ name: string; date: stri
 
     return event;
 };
+
+// Delete event.
+export const deleteEvent = (id: number) => {
+    // This will find the location of the id input.
+    const index = events.findIndex(event => event.id === id);
+    if (index === -1) return false;
+    // This will delete the event.
+    events.splice(index, 1);
+    return true;
+};  
+
