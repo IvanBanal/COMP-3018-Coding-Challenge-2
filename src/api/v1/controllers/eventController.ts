@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as eventService from "../services/eventService";
-import { HTTP_STATUS } from "src/constants/httpConstants";
+import { HTTP_STATUS } from "../../../constants/httpConstants";
 
 export const getEvents = (req: Request, res: Response) => {
     const events = eventService.getAllEvents();
